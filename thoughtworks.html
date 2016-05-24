@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>数字格式化</title>
+<style type="text/css">
+*{
+	padding:0;
+	margin:0;
+	}
+#box{
+	margin:20px 0 0 20px;
+	}
+.num,.handle{
+	padding:5px;
+	}
+span{
+	margin-top:20px;
+	padding:10px;
+	display:block;
+	line-height:50px;
+	}
+</style>
+<script type="text/javascript" language="javascript">
+
+function inputNum(){
+	var onum = document.getElementById("num"),
+		oadd = document.getElementById("add");
+	var inputN = onum.value;
+	var strN = String(inputN);
+	
+    var arr = strN.split(".");
+    if(arr.length==2&&arr[1]!=0){
+  		oadd.innerHTML += "输入数据为："+inputN+"<br/>"+"格式化输出为："+formatNum2(arr[0])+"."+arr[1]+"<br/>";
+  		}else{
+	  		oadd.innerHTML += "输入数据为："+inputN+"<br/>"+"格式化输出为："+formatNum2(arr[0])+"<br/>";
+	  		}
+ 		 }
+		 
+function formatNum2(str){
+  var len = str.length;
+  if(len<=3){
+	  return str;
+	  }
+  var rest = len%3;
+  return rest>0?str.slice(0,rest)+","+str.slice(rest,len).match(/\d{3}/g).join(",") : str.slice(rest,len).match(/\d{3}/g).join(",");
+  }				
+</script>
+</head>
+
+<body>
+<div id="box">
+<form>
+	请输入数字：
+	<input type="text" id="num" class="num"/>
+    <input type="button" id="handle" class="handle" value="提交" onclick="inputNum()"/>
+</form>
+<span id="add"></span>
+</div>
+</body>
+</html>
